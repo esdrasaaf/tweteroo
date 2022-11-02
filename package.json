@@ -1,10 +1,11 @@
 {
   "name": "back-end",
   "version": "1.0.0",
+  "type": "module",
   "description": "<h3> Projeto desenvolvido durante o curso de Desenvolvimento Full Stack da Driven Education! </h3> <br> Iniciando na parte de back-end, nesse projeto, eu criei a API do tweteroo, um clone do twitter <br> <br> Adaptado para dispositivos mobiles e desktops! 🐦",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
