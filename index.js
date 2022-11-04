@@ -61,15 +61,30 @@ const tweets = [
 const users = []
 
 app.post("/sign-up", (req, res) => {
-    const user = req.body
-    users.push(user)
+    const {username, avatar} = req.body
+
+    const objUser = {
+        username,
+        avatar
+    }
+    
+    if (!username || !avatar) {
+        return res.status(400).send("Todos os campos são obrigatórios!")
+    }
+
+    users.push(objUser)
     res.send("OK, você logou com sucesso!")
 })
 
 app.post("/tweets", (req, res) => {
     const {username, tweet} = req.body
-    const response = users.find(user => user.username === username)
-    const avatar = response.avatar
+
+    if (!username || !tweet) {
+        return res.status(400).send("Todos os campos são obrigatórios!")
+    }
+
+    let response = users.find(user => user.username === username)
+    let avatar = response.avatar
 
     const newTweet = {
         username,
