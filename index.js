@@ -73,11 +73,12 @@ app.post("/sign-up", (req, res) => {
     }
 
     users.push(objUser)
-    res.send("OK, você logou com sucesso!")
+    res.status(201).send("OK, você logou com sucesso!")
 })
 
 app.post("/tweets", (req, res) => {
-    const {username, tweet} = req.body
+    const username = req.headers.user
+    const tweet = req.body.tweet
 
     if (!username || !tweet) {
         return res.status(400).send("Todos os campos são obrigatórios!")
@@ -93,7 +94,7 @@ app.post("/tweets", (req, res) => {
     }
 
     tweets.push(newTweet)
-    res.send("OK, você tweetou com sucesso!")
+    res.status(201).send("OK, você tweetou com sucesso!")
 })
 
 app.get("/tweets", (req, res) => {
