@@ -101,4 +101,10 @@ app.get("/tweets", (req, res) => {
     res.send(tweets)
 })
 
+app.get("/tweets/:username", (req, res) => {
+    const username = req.params.username
+    const userTweets = tweets.filter(t => t.username === username)
+    res.status(200).send(userTweets)
+})
+
 app.listen(5000)
