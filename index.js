@@ -1,7 +1,9 @@
 import express from 'express'
 import cors from 'cors'
+
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 const tweets = [
     {
@@ -56,12 +58,28 @@ const tweets = [
     },
 ]
 
-const user = [
-    {
-        username: 'esdras_aaf', 
-        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info" 
+const users = []
+
+app.post("/sign-up", (req, res) => {
+    const user = req.body
+    users.push(user)
+    res.send("OK, você logou com sucesso!")
+})
+
+app.post("/tweets", (req, res) => {
+    const {username, tweet} = req.body
+    const response = users.find(user => user.username === username)
+    const avatar = response.avatar
+
+    const newTweet = {
+        username,
+        tweet,
+        avatar
     }
-]
+
+    tweets.push(newTweet)
+    res.send("OK, você tweetou com sucesso!")
+})
 
 app.get("/tweets", (req, res) => {
     res.send(tweets)
