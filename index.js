@@ -56,6 +56,31 @@ const tweets = [
         avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
         tweet: "ó os cara kkkk"
     },
+    {
+        username: "igorhnovais",
+        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+        tweet: "ossada"
+    },
+    {
+        username: "pedrola",
+        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+        tweet: "vou jogar um lolzin"
+    },
+    {
+        username: "juaomagrin",
+        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+        tweet: "tão de saca telha"
+    },
+    {
+        username: "callisto",
+        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+        tweet: "aoba"
+    },
+    {
+        username: "lusca",
+        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+        tweet: "consigo rodar vários servers sem desligar o pc"
+    }
 ]
 
 const users = []
@@ -93,12 +118,19 @@ app.post("/tweets", (req, res) => {
         avatar
     }
 
-    tweets.push(newTweet)
+    tweets.unshift(newTweet)
     res.status(201).send("OK, você tweetou com sucesso!")
 })
 
 app.get("/tweets", (req, res) => {
-    res.send(tweets)
+    const page = parseInt(req.query.page)
+    let limitedTweets;
+
+    for (let i = 0; i < page; i++){
+        limitedTweets = tweets.slice(i * 10, page * 10)
+    }
+    
+    res.send(limitedTweets)
 })
 
 app.get("/tweets/:username", (req, res) => {
