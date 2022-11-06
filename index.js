@@ -5,6 +5,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Os primeiros 10 tweets foram criados na mão! Facilitou na hora de codar, por isso deixei.
 const tweets = [
     {
         username: "igorhnovais",
